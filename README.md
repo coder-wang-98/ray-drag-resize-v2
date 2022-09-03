@@ -23,11 +23,14 @@ methods:{
 }
 ```
 ## props
-```
-activeColor ---------- 选中的颜色 default rgba(119, 221, 178, 0.3) 可选
-nodeKey ------------ 组件的key default uuid 可选
-minh ----------------- 最小高度 default 100 可选
-minw ----------------- 最小高度 default 100 可选
-```
+属性|描述|default|type
+--|--|--|--
+activeColor| 选中的颜色 |rgba(119, 221, 178, 0.3) |string
+nodeKey | 组件的key |  uuid() | number/string
+minh | 最小高度 | 100 | number
+minw | 最小高度 | 100 | number
+disabled|禁止拖拽和放大缩小|false|boolean
+dragDisabled|禁止拖拽|false|boolean
+resizeDisabled|禁止放大缩小|false|boolean
 ### 说明
 此组件为vue2版本的组件，如需要vue3版本的安装 ray-drag-resize-v3

@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <drag-resize-v2 @onDragResize="getData">
+    <drag-resize-v2 @onDragResize="getData" dragDisabled >
       test
     </drag-resize-v2>
-    <drag-resize-v2 @onDragResize="getData">
+    <drag-resize-v2 @onDragResize="getData" >
       test1
     </drag-resize-v2>
   </div>

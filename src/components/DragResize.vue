@@ -1,7 +1,8 @@
 <template>
   <div 
   class="drag-resize-container"
-  :style="cur == nodeKey ? `backgroundColor:${activeColor}` : ''" 
+  :class="disabled ? 'disable' : ''"
+  :style="cur == nodeKey &&!disabled ? `backgroundColor:${activeColor}` : ''" 
   ref="dragResize" 
   @mousedown="onDrag"  
   @mouseenter="cur = nodeKey " 
@@ -16,7 +17,7 @@
     <slot>
 
     </slot>
-    <div ref="resizeNode" class="resize-node" @mousedown.stop="onResize">
+    <div ref="resizeNode" class="resize-node" @mousedown.stop="onResize" v-show="!resizeDisabled">
 
     </div>
   </div>
@@ -58,6 +59,18 @@ props:{
   minw:{
     type:Number,
     default:100
+  },
+  disabled:{
+    type:Boolean,
+    default:false
+  },
+  dragDisabled:{
+    type:Boolean,
+    default:false
+  },
+  resizeDisabled:{
+    type:Boolean,
+    default:false
   }
 },
 computed: {
@@ -73,6 +86,9 @@ watch: {},
 //方法集合
 methods: {
   onDrag(e){
+    if(this.dragDisabled || this.disabled){
+      console.warn('您已关闭拖拽功能,如需拖拽请将disabled|dragDisabled设置为true')
+    }else{
       const parentDom = this.$refs.dragResize.parentElement
       let oldPostion = parentDom.style.position
       parentDom.style.position = 'relative'
@@ -126,8 +142,12 @@ methods: {
               nodeKey:_this.nodeKey
           })
       }
+    }
   },
   onResize(){
+    if(this.resizeDisabled || this.disabled){
+      console.warn('您已关闭设置大小功能,如想开启请将disabled|resizeDisabled设置为true')
+    }else{
       const parentDom = this.$refs.dragResize.parentElement
       const event = window.event
       event?.stopPropagation()
@@ -148,6 +168,7 @@ methods: {
           this.$refs.dragResize.style.height = newHeight + "px";
           this.size.width = newWidth
           this.size.height = newHeight
+          console.log(newWidth,newHeight)
           this.$refs.dragResize.setAttribute('width',newWidth+'px')
           this.$refs.dragResize.setAttribute('height',newHeight+'px')
       }
@@ -156,9 +177,15 @@ methods: {
           document.removeEventListener('mousemove', move)
           document.removeEventListener('mouseup', up)
           this.resizeShow = false
+          let reg = /(\d+px, \d+px)/
+          let curX,curY
+          if(this.$refs.dragResize.style.transform.match(reg)){
+            curX = this.$refs.dragResize.style.transform.match(reg)[0].split(',')[0]
+            curY = this.$refs.dragResize.style.transform.match(reg)[0].split(',')[1]
+          }
           this.$emit('onDragResize',{
-              left:this.$refs.dragResize.style.left,
-              top:this.$refs.dragResize.style.top,
+              left:curX,
+              top:curY,
               height:this.$refs.dragResize.style.height,
               width:this.$refs.dragResize.style.width,
               nodeKey:this.nodeKey
@@ -167,6 +194,7 @@ methods: {
 
       document.addEventListener('mousemove', move)
       document.addEventListener('mouseup', up)
+    }
   }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
@@ -218,6 +246,17 @@ mounted() {
       width: 20px;
       height: 20px;
     }
+  }
+}
+.disable{
+  &:hover{
+    cursor: default;
+  }
+  .tip{
+    display: none;
+  }
+  .resize-node{
+    display: none;
   }
 }
 </style>

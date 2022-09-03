@@ -1,12 +1,16 @@
 {
   "name": "ray-drag-resize-v2",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "private": false,
   "main": "lib/drag-resize-v2.common.js",
   "files": [
     "lib/*"
   ],
-  "keywords": ["drag","resize","vue"],
+  "keywords": [
+    "drag",
+    "resize",
+    "vue"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
