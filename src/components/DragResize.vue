@@ -71,6 +71,22 @@ props:{
   resizeDisabled:{
     type:Boolean,
     default:false
+  },
+  initTop:{
+    type:Number,
+    default:10
+  },
+  initLeft:{
+    type:Number,
+    default:10
+  },
+  initHeight:{
+    type:Number,
+    default:200
+  },
+  initWidth:{
+    type:Number,
+    default:200
   }
 },
 computed: {
@@ -204,7 +220,9 @@ created() {
 //生命周期 - 挂载完成（可以访问DOM元素）
 mounted() {
   this.$refs.dragResize.parentElement.style.position = 'relative'
-  this.$refs.dragResize.style.transform = `translate(${this.$refs.dragResize.offsetLeft}px, ${this.$refs.dragResize.offsetTop}px)`
+  this.$refs.dragResize.style.height = this.initHeight + 'px'
+  this.$refs.dragResize.style.width = this.initWidth + 'px'
+  this.$refs.dragResize.style.transform = `translate(${this.initLeft}px, ${this.initTop}px)`
 },
 }
 </script>

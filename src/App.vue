@@ -3,7 +3,7 @@
     <drag-resize-v2 @onDragResize="getData" dragDisabled >
       test
     </drag-resize-v2>
-    <drag-resize-v2 @onDragResize="getData" >
+    <drag-resize-v2 @onDragResize="getData" :initTop="44" :initLeft="120">
       test1
     </drag-resize-v2>
   </div>
