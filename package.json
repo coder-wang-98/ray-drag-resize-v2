@@ -1,6 +1,6 @@
 {
   "name": "ray-drag-resize-v2",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": false,
   "main": "lib/drag-resize-v2.common.js",
   "files": [

@@ -17,9 +17,11 @@
     <slot>
 
     </slot>
-    <div ref="resizeNode" class="resize-node" @mousedown.stop="onResize" v-show="!resizeDisabled">
+    <div ref="resizeNode" class="resize-node" @mousedown.stop="onResize" v-show="!resizeDisabled && horn" >
 
     </div>
+    <div class="bottom line" @mousedown.stop="onResize" v-show="!resizeDisabled && edge"></div>
+    <div class="right line" @mousedown.stop="onResize" v-show="!resizeDisabled && edge" ></div>
   </div>
 </template>
 
@@ -87,6 +89,14 @@ props:{
   initWidth:{
     type:Number,
     default:200
+  },
+  horn:{
+    type:Boolean,
+    default:true
+  },
+  edge:{
+    type:Boolean,
+    default:true
   }
 },
 computed: {
@@ -277,4 +287,21 @@ mounted() {
     display: none;
   }
 }
+
+.bottom{
+  position: absolute;
+  width: 100%;
+  height: 6px;
+  bottom: 0px;
+  cursor: row-resize;
+}
+
+.right{
+  position: absolute;
+  height: 100%;
+  width: 6px;
+  right: 0px;
+  cursor: col-resize;
+}
+
 </style>

@@ -36,9 +36,12 @@ initWidth | 初始宽度 | 200 | number
 disabled|禁止拖拽和放大缩小|false|boolean
 dragDisabled|禁止拖拽|false|boolean
 resizeDisabled|禁止放大缩小|false|boolean
+horn|通过角进行拖拽|true|boolean
+edge|通过边进行拖拽|true|boolean
 ## events
 函数名|描述
 --|--
 onDragResize|拖拽或设置大小后抛出的事件 包含当前组件的位置及大小信息及nodeKey
 ### 说明
-此组件为vue2版本的组件，如需要vue3版本的安装 ray-drag-resize-v3
+此组件为vue2版本的组件，如需要vue3版本的安装 ray-drag-resize-v3(更新较慢)。
+如有改进建议[github](https://github.com/Ray-wgs/ray-drag-resize-v2)提issue。
